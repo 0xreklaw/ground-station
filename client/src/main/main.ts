@@ -1,27 +1,31 @@
-import { app, BrowserWindow } from 'electron';
-import * as path from 'path';
+import { app, BrowserWindow } from "electron";
+import * as path from "path";
 
-let mainWindow;
+let mainWindow: BrowserWindow | null;
 
 function createWindow() {
   mainWindow = new BrowserWindow({});
 
+  // mainWindow.webPreferences = {
+  //   enableRemoteModule: true,
+  // };
+
   // Vite dev server URL
-  mainWindow.loadURL('http://localhost:5173');
-  mainWindow.on('closed', () => mainWindow = null);
+  mainWindow.loadURL("http://localhost:5173");
+  mainWindow.on("closed", () => (mainWindow = null));
 }
 
 app.whenReady().then(() => {
   createWindow();
 });
 
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
+app.on("window-all-closed", () => {
+  if (process.platform !== "darwin") {
     app.quit();
   }
 });
 
-app.on('activate', () => {
+app.on("activate", () => {
   if (mainWindow == null) {
     createWindow();
   }
