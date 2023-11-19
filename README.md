@@ -1,4 +1,4 @@
-# Welcome to the Olin Rocketry Ground Station 👋
+# Olin Rocketry Ground Station 🚀
 
 ## Follow these steps to setup this repo on your local machine
 ## Client Setup
