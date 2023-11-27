@@ -268,6 +268,15 @@ const DiagnosticsPanel = () => {
   );
 };
 
+const MissionTime = () => {
+  return (
+    <div className="text-center">
+      <p className="text-lg font-bold">Mission Time</p>
+      <p>00:00:00:00</p>
+    </div>
+  )
+}
+
 export default function Overview() {
   const graphOptions = [
     {
@@ -323,6 +332,7 @@ export default function Overview() {
         <div className="w-full p-4">
           <div className="flex row">
             <h1>Overview Screen</h1>
+            <MissionTime />
             <DiagnosticsPanel />
           </div>
           <div>

@@ -62,11 +62,49 @@ const SelectionPanel = () => {
   );
 };
 
+const SavePanel = () => {
+  return (
+    <div className="max-w-xs p-6 bg-dark border border-dark rounded-lg mb-4">
+      <p className="text-lg font-bold">Saving Options</p>
+      <button
+        type="button"
+        className="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700 w-full"
+      >
+        View in Folder
+      </button>
+      <button
+        type="button"
+        className="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700 w-full"
+      >
+        Save Logs
+      </button>
+    </div>
+  );
+};
+
+const RawDataPanel = () => {
+  return (
+    <div className="max-w-xl p-6 bg-dark border border-dark rounded-lg mb-4"></div>
+  );
+};
+
 export default function Logging() {
   return (
     <Layout>
-      <h1>Logging Screen</h1>
-      <SelectionPanel />
+      <div className="flex row">
+        <div className="w-full p-4">
+          <div className="flex row">
+            <h1>Logging Screen</h1>
+          </div>
+          <div>
+            <RawDataPanel />
+          </div>
+        </div>
+        <div className="p-4">            
+          <SelectionPanel />
+          <SavePanel />
+        </div>
+      </div>
     </Layout>
   );
 }
