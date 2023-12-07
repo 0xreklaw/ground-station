@@ -4,6 +4,7 @@
 
 /* INCLUDE LIBRARIES */
 #include <WiFi.h>
+#include "SPIFFS.h"
 
 /* GLOBALS */
 /* WiFi */
@@ -24,7 +25,7 @@ void setup(){
   
   Serial.println("SoftAP started with IP: " + WiFi.softAPIP().toString());
 }
-w
+
 /* LOOP */
 void loop(){
   // Check if a client has connected
@@ -32,15 +33,22 @@ void loop(){
   if (client) {
     Serial.println("New client connected");
 
-    // Read the request
-    String request = client.readStringUntil('\r');
-    Serial.println("Request: " + request);
+    // Open the file for reading
+    File file = SPIFFS.open("/4_21_2082_refactored.txt", "r");
 
-    // Send a response to the client
-    client.println("HTTP/1.1 200 OK");
-    client.println("Content-Type: text/html");
-    client.println("");
-    client.println("<h1>Hello from ESP32!</h1>");
+    if (file) {
+      //Read and print the content of the file
+      while (file.available()) {
+        Serial.write(file.read());
+      }
+
+      file.close();
+    } 
+
+    else {
+      Serial.println("Failed to open file");
+    }
+    
     client.stop();
     Serial.println("Client disconnected");
   }
