@@ -24,17 +24,14 @@ void setup(){
   server.begin();
   
   Serial.println("SoftAP started with IP: " + WiFi.softAPIP().toString());
-}
+  if (!SPIFFS.begin(true)) {
+    Serial.println("An Error has occured while mounting");
+  }
+  
+  Serial.println(SPIFFS.exists("/4_21_2082_refactored.txt"));
 
-/* LOOP */
-void loop(){
-  // Check if a client has connected
-  WiFiClient client = server.available();
-  if (client) {
-    Serial.println("New client connected");
-
-    // Open the file for reading
-    File file = SPIFFS.open("/4_21_2082_refactored.txt", "r");
+  // Open the file for reading
+    File file = SPIFFS.open("/4_21_2082_refactored.txt");
 
     if (file) {
       //Read and print the content of the file
@@ -48,7 +45,15 @@ void loop(){
     else {
       Serial.println("Failed to open file");
     }
-    
+}
+
+/* LOOP */
+void loop(){
+//   Check if a client has connected
+  WiFiClient client = server.available();
+  if (client) {
+    Serial.println("New client connected");
+
     client.stop();
     Serial.println("Client disconnected");
   }
